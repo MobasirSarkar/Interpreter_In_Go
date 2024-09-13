@@ -1,7 +1,7 @@
 package lexer
 
 import (
-	"interperter/token"
+	"github.com/MobasirSarkar/Interpreter_In_Go/token"
 	"testing"
 )
 
