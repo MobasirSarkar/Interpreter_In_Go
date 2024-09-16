@@ -1,6 +1,8 @@
 package parser
 
 import (
+	"fmt"
+
 	"github.com/MobasirSarkar/Interpreter_In_Go/ast"
 	"github.com/MobasirSarkar/Interpreter_In_Go/lexer"
 	"github.com/MobasirSarkar/Interpreter_In_Go/token"
@@ -11,15 +13,30 @@ type Parser struct {
 
 	curToken  token.Token
 	peekToken token.Token
+
+	errros []string
 }
 
 func New(l *lexer.Lexer) *Parser {
-	p := &Parser{l: l}
+	p := &Parser{
+		l:      l,
+		errros: []string{},
+	}
 
 	p.nextToken()
 	p.nextToken()
 
 	return p
+}
+
+func (p *Parser) Errors() []string {
+	return p.errros
+}
+
+func (p *Parser) peekError(t token.TokenType) {
+	msg := fmt.Sprintf("expected next token to be  %s, got %s instead",
+		t, p.peekToken.Type)
+	p.errros = append(p.errros, msg)
 }
 
 func (p *Parser) nextToken() {
@@ -39,6 +56,16 @@ func (p *Parser) ParseProgram() *ast.Program {
 		p.nextToken()
 	}
 	return program
+}
+
+func (p *Parser) expectPeek(t token.TokenType) bool {
+	if p.peekTokenIs(t) {
+		p.nextToken()
+		return true
+	} else {
+		p.peekError(t)
+		return false
+	}
 }
 
 func (p *Parser) parseStatement() ast.Statement {
@@ -73,13 +100,4 @@ func (p *Parser) curTokenIs(t token.TokenType) bool {
 
 func (p *Parser) peekTokenIs(t token.TokenType) bool {
 	return p.peekToken.Type == t
-}
-
-func (p *Parser) expectPeek(t token.TokenType) bool {
-	if p.peekTokenIs(t) {
-		p.nextToken()
-		return true
-	} else {
-		return false
-	}
 }
