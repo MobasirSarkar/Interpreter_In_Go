@@ -170,7 +170,7 @@ func TestParsingPrefixExpressions(t *testing.T) {
 		Operator      string
 		intergerValue int64
 	}{
-		{"!15;", "!", 5},
+		{"!5;", "!", 5},
 		{"-15;", "-", 15},
 	}
 
@@ -191,7 +191,7 @@ func TestParsingPrefixExpressions(t *testing.T) {
 
 		exp, ok := stmt.Expression.(*ast.PrefixExpression)
 		if !ok {
-			t.Fatalf("stmt is not ast.PrefixExpression. got=%s", stmt.Expression)
+			t.Fatalf("stmt is not ast.PrefixExpression. got=%T", stmt.Expression)
 		}
 		if exp.Operator != tt.Operator {
 			t.Fatalf("exp Operator is not '%s'.got=%s", tt.Operator, exp.Operator)
