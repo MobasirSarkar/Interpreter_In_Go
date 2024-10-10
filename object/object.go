@@ -17,6 +17,7 @@ const (
 	RETURN_VALUE_OBJ = "RETURN_VALUE"
 	ERROR_OBJ        = "ERROR"
 	FUNCTION_OBJ     = "FUNCTION"
+	STRING_OBJ       = "STRING"
 )
 
 type Object interface {
@@ -42,11 +43,18 @@ type Error struct {
 	Message string
 }
 
+type String struct {
+	Value string
+}
+
 type Function struct {
 	Parameters []*ast.Identifier
 	Body       *ast.BlockStatement
 	Env        *Environment
 }
+
+func (s *String) Type() ObjectType { return STRING_OBJ }
+func (s *String) Inspect() string  { return s.Value }
 
 func (i *Integer) Inspect() string  { return fmt.Sprintf("%d", i.Value) }
 func (i *Integer) Type() ObjectType { return INTEGER_OBJ }
