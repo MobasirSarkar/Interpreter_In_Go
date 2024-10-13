@@ -10,11 +10,11 @@ This project is an implementation of the **Monkey Programming Language Interpret
 - **Variables & Functions**: Includes variable bindings, first-class functions, and closures.
 - **Data Types**: Supports integers, booleans, strings, arrays, and hash maps.
 - **Conditionals**: Implements `if-else` statements and return expressions.
-- **Arithmetic & Logical Operators**: Handles basic arithmetic and logical operators like `+`, `-`, `*`, `&&`, `||`, and more.
+- **Arithmetic & Logical Operators**: Handles basic arithmetic and logical operators like `+`, `-`, `*`, and more.
 - **REPL Support**: A fully interactive Read-Eval-Print-Loop (REPL) to test and run code in real-time.
 
 ## 3. Dependencies
-- **Go 1.7+**: The interpreter is built using Go and requires at least version 1.7.
+- **Go 1.23.1+**: The interpreter is built using Go and requires at least version 1.21.1.
 
 ## 4. How to Run
 1. Clone the repository.
