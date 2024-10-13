@@ -11,7 +11,7 @@ import (
 	"github.com/MobasirSarkar/Interpreter_In_Go/parser"
 )
 
-const PROMPT = ">>"
+const PROMPT = "➜ "
 
 func Start(in io.Reader, out io.Writer) {
 	scanner := bufio.NewScanner(in)
